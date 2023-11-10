@@ -1,15 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
+import { NavigationContainer, useNavigation} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+function TelaInicial(){
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>Oba, é o meu primeiro app do React Native :)</Text>
+      <Text>Sabia que é o meu primeiro app do React Native? :)</Text>
+      <Button title="Cadastrar" onPress={()=>{
+        navigation.navigate ('Cadastro')
+      }}></Button>
       <StatusBar style="auto" />
     </View>
   );
 }
+
+export default function App() {
+  const Stack = createNativeStackNavigator()
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Início" component={TelaInicial} />
+        <Stack.Screen name="Cadastro" component={TelaCadastro} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+
+}
+
+function TelaCadastro(){
+  return (
+    <View style={styles.container}>
+      <Text>essa é a segunda tela!</Text>
+      <Text>aqui faz o cadastro</Text>
+      <Button title="Voltar" onPress={()=>{
+        navigation.navigate ('Início')
+      }}></Button>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
 
 const styles = StyleSheet.create({
   container: {
