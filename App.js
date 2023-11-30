@@ -1,16 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button} from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
 import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function TelaInicial(){
   const navigation = useNavigation();
+  const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
-      <Text>esse é o início</Text>
-      <Button title="Cadastrar" onPress={()=>{
-        navigation.navigate ('Cadastro')
-      }}></Button>
+      <Text>Cadastre-se</Text>
+      <TextInput placeholder="Nome" style={styles.input} onChangeText={onChangeText} value={text}/>
+      <TextInput placeholder="Sobrenome" style={styles.input} onChangeText={onChangeText} value={text}/>
+      <TextInput placeholder="Cidade" style={styles.input} onChangeText={onChangeText} value={text}/>
+      <TextInput 
+        placeholder="E-mail"
+        keyboardType="email-address"
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+      />
+      <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
+      <Button title="Cadastrar" onPress={() => navigation.navigate('Cadastro')} />
       <StatusBar style="auto" />
     </View>
   );
@@ -18,13 +29,22 @@ function TelaInicial(){
 
 function TelaCadastro(){
   const navigation = useNavigation();
+  const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
-      <Text>aqui faz o cadastro</Text>
-      <Button title="esqueceu senha" onPress={()=>{
-        navigation.navigate ('Esqueceu Senha')
-      }}></Button>
+      <Text>aqui faz o login</Text>
       <StatusBar style="auto" />
+      <TextInput
+        placeholder="E-mail"
+        keyboardType="email-address"
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+      />
+      <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
+      <Button title="Login" onPress={() => navigation.navigate('Esqueceu Senha')} />
+      <StatusBar style="auto" />
+      <Text>{text}</Text>
     </View>
   );
 }
@@ -121,6 +141,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
 
