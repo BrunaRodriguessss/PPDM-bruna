@@ -20,6 +20,7 @@ function TelaInicial(){
         onChangeText={onChangeText}
         value={text}
       />
+      
       <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
       <Button title="Cadastrar" onPress={() => navigation.navigate('Cadastro')} />
       <StatusBar style="auto" />
