@@ -1,6 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -9,10 +9,15 @@ function TelaInicial(){
   const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
-      <Text>Cadastre-se</Text>
-      <TextInput placeholder="Nome" style={styles.input} onChangeText={onChangeText} value={text}/>
-      <TextInput placeholder="Sobrenome" style={styles.input} onChangeText={onChangeText} value={text}/>
-      <TextInput placeholder="Cidade" style={styles.input} onChangeText={onChangeText} value={text}/>
+      <Image
+        style={styles.image}
+        source={{
+          uri: 'https://i.pinimg.com/564x/8b/6f/56/8b6f560c593b4062218ed2d06eb71b84.jpg',
+        }}
+      />
+      <Text style={styles.text}>BOOK GUIDE</Text>
+      <Text style={styles.text1}>Já é cadastrado?</Text>
+      <TextInput placeholder="Nome e Sobrenome" style={styles.input} onChangeText={onChangeText} value={text}/>
       <TextInput 
         placeholder="E-mail"
         keyboardType="email-address"
@@ -22,8 +27,10 @@ function TelaInicial(){
       />
       
       <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
-      <Button title="Cadastrar" onPress={() => navigation.navigate('Cadastro')} />
+      <Button color= "#230B41" title="Inscreva-se" onPress={() => navigation.navigate('Cadastro')} />
       <StatusBar style="auto" />
+      
+      
     </View>
   );
 }
@@ -33,7 +40,7 @@ function TelaCadastro(){
   const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
-      <Text>aqui faz o login</Text>
+      <Text style={styles.text}>Faça login</Text>
       <StatusBar style="auto" />
       <TextInput
         placeholder="E-mail"
@@ -43,7 +50,7 @@ function TelaCadastro(){
         value={text}
       />
       <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
-      <Button title="Login" onPress={() => navigation.navigate('Esqueceu Senha')} />
+      <Button color= "#230B41" title="Login" onPress={() => navigation.navigate('Esqueceu Senha')} />
       <StatusBar style="auto" />
       <Text>{text}</Text>
     </View>
@@ -54,8 +61,8 @@ function TelaEsqueceuSenha(){
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>Essa é a tela de "esqueci a senha"</Text>
-      <Button title="tela principal" onPress={()=>{
+      <Text style={styles.text}>Essa é a tela de "esqueci a senha"</Text>
+      <Button color= "#230B41" title="tela principal" onPress={()=>{
         navigation.navigate ('Principal')
       }}></Button>
       <StatusBar style="auto" />
@@ -67,8 +74,8 @@ function TelaPrincipal(){
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>essa é a tela principal</Text>
-      <Button title="resenhas" onPress={()=>{
+      <Text style={styles.text}>essa é a tela principal</Text>
+      <Button color= "#230B41" title="resenhas" onPress={()=>{
         navigation.navigate ('Ver Resenhas')
       }}></Button>
       <StatusBar style="auto" />
@@ -80,8 +87,8 @@ function TelaDasResenhas(){
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>Essa é a tela das resenhas</Text>
-      <Button title=" novas resenhas" onPress={()=>{
+      <Text style={styles.text}>Essa é a tela das resenhas</Text>
+      <Button color= "#230B41" title=" novas resenhas" onPress={()=>{
         navigation.navigate ('Novas Resenhas')
       }}></Button>
       <StatusBar style="auto" />
@@ -93,8 +100,8 @@ function TelaNovasResenhas(){
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>essa é a tela para escrever novas resenhas</Text>
-      <Button title="perfil" onPress={()=>{
+      <Text style={styles.text}>essa é a tela para escrever novas resenhas</Text>
+      <Button color= "#230B41" title="perfil" onPress={()=>{
         navigation.navigate ('Perfil')
       }}></Button>
       <StatusBar style="auto" />
@@ -106,8 +113,8 @@ function TelaPerfil(){
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>essa é a tela do perfil</Text>
-      <Button title="voltar" onPress={()=>{
+      <Text style={styles.text}>essa é a tela do perfil</Text>
+      <Button color= "#230B41" title="voltar" onPress={()=>{
         navigation.navigate ('Início')
       }}></Button>
       <StatusBar style="auto" />
@@ -139,7 +146,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#B397BB',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -148,6 +155,28 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 15,
+    backgroundColor: '#D1D5DA',
+
+  },
+  Button:{
+    
+    borderRadius: 15,
+  },
+  text:{
+    fontFamily:"italic",
+    fontSize:40,
+    color:"#230B41",
+  },
+  text1:{
+    fontFamily:"italic",
+    fontSize:20,
+    color:"#230B41",
+  },
+  image:{
+    width: "200px",
+    height:"200px",
+    borderRadius: "100px",
   },
 });
 
