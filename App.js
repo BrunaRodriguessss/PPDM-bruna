@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image, Pressable} from 'react-native';
 import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -25,12 +25,13 @@ function TelaInicial(){
         onChangeText={onChangeText}
         value={text}
       />
-      
-      <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
-      <Button color= "#230B41" title="Inscreva-se" onPress={() => navigation.navigate('Cadastro')} />
+       <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
+      <Pressable style={styles.Button} onPress={()=>{
+        navigation.navigate ('Cadastro')
+      }}>
+        <Text style={styles.text5}>Inscreva-se</Text>
+      </Pressable>
       <StatusBar style="auto" />
-      
-      
     </View>
   );
 }
@@ -40,6 +41,12 @@ function TelaCadastro(){
   const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.image}
+        source={{
+          uri: 'https://i.pinimg.com/564x/8b/6f/56/8b6f560c593b4062218ed2d06eb71b84.jpg',
+        }}
+      />
       <Text style={styles.text}>Faça login</Text>
       <StatusBar style="auto" />
       <TextInput
@@ -50,7 +57,12 @@ function TelaCadastro(){
         value={text}
       />
       <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
-      <Button color= "#230B41" title="Login" onPress={() => navigation.navigate('Esqueceu Senha')} />
+      <Text style={styles.text3}>Esqueceu a senha?</Text>
+      <Pressable style={styles.Button} onPress={()=>{
+        navigation.navigate ('Esqueceu Senha')
+      }}>
+        <Text style={styles.text5}>Login</Text>
+      </Pressable>
       <StatusBar style="auto" />
       <Text>{text}</Text>
     </View>
@@ -59,12 +71,29 @@ function TelaCadastro(){
 
 function TelaEsqueceuSenha(){
   const navigation = useNavigation();
+  const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Essa é a tela de "esqueci a senha"</Text>
-      <Button color= "#230B41" title="tela principal" onPress={()=>{
+        <Image
+        style={styles.image}
+        source={{
+          uri: 'https://i.pinimg.com/564x/d8/d1/a0/d8d1a03521de466aa26856a1962a85e5.jpg',
+        }}
+      />
+      <Text style={styles.text}>Redefinir senha</Text>
+      <Text style={styles.text2}>Digite um e-mail para ler as informações</Text>
+      <TextInput 
+        placeholder="E-mail"
+        keyboardType="email-address"
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+      />
+      <Pressable style={styles.Button} onPress={()=>{
         navigation.navigate ('Principal')
-      }}></Button>
+      }}>
+        <Text style={styles.text5}>Enviar</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
@@ -75,9 +104,11 @@ function TelaPrincipal(){
   return (
     <View style={styles.container}>
       <Text style={styles.text}>essa é a tela principal</Text>
-      <Button color= "#230B41" title="resenhas" onPress={()=>{
+      <Pressable style={styles.Button} onPress={()=>{
         navigation.navigate ('Ver Resenhas')
-      }}></Button>
+      }}>
+        <Text style={styles.text5}>Resenhas</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
@@ -88,9 +119,11 @@ function TelaDasResenhas(){
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Essa é a tela das resenhas</Text>
-      <Button color= "#230B41" title=" novas resenhas" onPress={()=>{
+      <Pressable style={styles.Button} onPress={()=>{
         navigation.navigate ('Novas Resenhas')
-      }}></Button>
+      }}>
+        <Text style={styles.text5}>novas resenhas</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
@@ -98,12 +131,22 @@ function TelaDasResenhas(){
 
 function TelaNovasResenhas(){
   const navigation = useNavigation();
+  const [text, onChangeText] = React.useState('');
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>essa é a tela para escrever novas resenhas</Text>
-      <Button color= "#230B41" title="perfil" onPress={()=>{
+      <Text style={styles.text}>Escrevas novas resenhas</Text>
+      <Text style={styles.text4}>Autor(a)</Text>
+      <TextInput placeholder="" style={styles.input} onChangeText={onChangeText} value={text}/>
+      <Text style={styles.text4}>Título dos livros</Text>
+      <TextInput placeholder="" style={styles.input} onChangeText={onChangeText} value={text}/>
+      <Text style={styles.text4}>Resenha</Text>
+      <TextInput placeholder="" style={styles.input} onChangeText={onChangeText} value={text}/>
+
+      <Pressable style={styles.Button} onPress={()=>{
         navigation.navigate ('Perfil')
-      }}></Button>
+      }}>
+        <Text style={styles.text5}>Finalizar</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
@@ -114,9 +157,11 @@ function TelaPerfil(){
   return (
     <View style={styles.container}>
       <Text style={styles.text}>essa é a tela do perfil</Text>
-      <Button color= "#230B41" title="voltar" onPress={()=>{
+      <Pressable style={styles.Button} onPress={()=>{
         navigation.navigate ('Início')
-      }}></Button>
+      }}>
+        <Text style={styles.text5}>voltar</Text>
+      </Pressable>
       <StatusBar style="auto" />
     </View>
   );
@@ -140,9 +185,6 @@ export default function App() {
   );
 
 }
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -160,8 +202,10 @@ const styles = StyleSheet.create({
 
   },
   Button:{
-    
+    backgroundColor:"#230b41",
     borderRadius: 15,
+    margin: 15,
+    padding: 10,
   },
   text:{
     fontFamily:"italic",
@@ -172,6 +216,28 @@ const styles = StyleSheet.create({
     fontFamily:"italic",
     fontSize:20,
     color:"#230B41",
+    textDecorationLine: 'underline',
+  },
+  text2:{
+    fontFamily:"italic",
+    fontSize:20,
+    color:"#230B41",
+  },
+  text3:{
+    fontFamily:"italic",
+    fontSize:20,
+    color:"#230B41",
+    textDecorationLine: 'underline',
+  },
+  text4:{
+    fontFamily:"italic",
+    fontSize:17,
+    color:"#230B41",
+  },
+  text5:{
+    fontFamily:"italic",
+    fontSize:17,
+    color:"#FFFFFF",
   },
   image:{
     width: "200px",
