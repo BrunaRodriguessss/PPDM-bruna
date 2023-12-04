@@ -4,7 +4,37 @@ import { StyleSheet, Text, View, Button, TextInput, Image, Pressable} from 'reac
 import { NavigationContainer, useNavigation} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+
 function TelaInicial(){
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+       <Text style={styles.text}>BOOK GUIDE</Text>
+      <Text style={styles.text6}>Seja bem-vindo(a)!</Text>
+      <Image
+        style={styles.image2}
+        source={{
+          uri: 'https://i.pinimg.com/564x/d5/39/a5/d539a5edce40ddd8725871104172cae9.jpg',
+        }}
+      />
+      <Pressable style={styles.Button} onPress={()=>{
+        navigation.navigate ('Login')
+      }}>
+        <Text style={styles.text5}>Entrar</Text>
+      </Pressable>
+
+      <Pressable style={styles.Button} onPress={()=>{
+        navigation.navigate ('Cadastro')
+      }}>
+        <Text style={styles.text5}>Cadastrar</Text>
+      </Pressable>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+
+function TelaCadastro(){
   const navigation = useNavigation();
   const [text, onChangeText] = React.useState('');
   return (
@@ -16,7 +46,7 @@ function TelaInicial(){
         }}
       />
       <Text style={styles.text}>BOOK GUIDE</Text>
-      <Text style={styles.text1}>Já é cadastrado?</Text>
+      <Text style={styles.text1}>Faça cadastro</Text>
       <TextInput placeholder="Nome e Sobrenome" style={styles.input} onChangeText={onChangeText} value={text}/>
       <TextInput 
         placeholder="E-mail"
@@ -27,7 +57,7 @@ function TelaInicial(){
       />
        <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
       <Pressable style={styles.Button} onPress={()=>{
-        navigation.navigate ('Cadastro')
+        navigation.navigate ('Login')
       }}>
         <Text style={styles.text5}>Inscreva-se</Text>
       </Pressable>
@@ -36,7 +66,7 @@ function TelaInicial(){
   );
 }
 
-function TelaCadastro(){
+function TelaLogin(){
   const navigation = useNavigation();
   const [text, onChangeText] = React.useState('');
   return (
@@ -57,11 +87,16 @@ function TelaCadastro(){
         value={text}
       />
       <TextInput placeholder="Senha" secureTextEntry={true} style={styles.input}/>
-      <Text style={styles.text3}>Esqueceu a senha?</Text>
+      <Pressable style={styles.Button} onPress={()=>{
+        navigation.navigate ('Principal')
+      }}>
+        <Text style={styles.text5}>Enviar</Text>
+      </Pressable>
+
       <Pressable style={styles.Button} onPress={()=>{
         navigation.navigate ('Esqueceu Senha')
       }}>
-        <Text style={styles.text5}>Login</Text>
+        <Text style={styles.text5}>Esqueci a senha</Text>
       </Pressable>
       <StatusBar style="auto" />
       <Text>{text}</Text>
@@ -152,13 +187,14 @@ function TelaNovasResenhas(){
   );
 }
 
+
 function TelaPerfil(){
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.text}>essa é a tela do perfil</Text>
       <Pressable style={styles.Button} onPress={()=>{
-        navigation.navigate ('Início')
+        navigation.navigate ('Inicio')
       }}>
         <Text style={styles.text5}>voltar</Text>
       </Pressable>
@@ -173,8 +209,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Início" component={TelaInicial} />
+        <Stack.Screen name="Inicio" component={TelaInicial} />
         <Stack.Screen name="Cadastro" component={TelaCadastro} />
+        <Stack.Screen name="Login" component={TelaLogin} />
         <Stack.Screen name="Esqueceu Senha" component={TelaEsqueceuSenha} />
         <Stack.Screen name="Principal" component={TelaPrincipal} />
         <Stack.Screen name="Ver Resenhas" component={TelaDasResenhas} />
@@ -199,7 +236,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 15,
     backgroundColor: '#D1D5DA',
-
   },
   Button:{
     backgroundColor:"#230b41",
@@ -208,41 +244,55 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   text:{
-    fontFamily:"italic",
-    fontSize:40,
+    fontFamily:"times",
+    fontSize:50,
     color:"#230B41",
   },
   text1:{
-    fontFamily:"italic",
+    fontFamily:"times",
     fontSize:20,
     color:"#230B41",
     textDecorationLine: 'underline',
   },
   text2:{
-    fontFamily:"italic",
+    fontFamily:"times",
     fontSize:20,
     color:"#230B41",
   },
   text3:{
-    fontFamily:"italic",
+    fontFamily:"times",
     fontSize:20,
     color:"#230B41",
     textDecorationLine: 'underline',
   },
   text4:{
-    fontFamily:"italic",
+    fontFamily:"times",
     fontSize:17,
     color:"#230B41",
   },
   text5:{
-    fontFamily:"italic",
+    fontFamily:"times",
     fontSize:17,
     color:"#FFFFFF",
+  },
+  text6:{
+    fontFamily:"times",
+    fontSize:20,
+    color:"#230B41",
   },
   image:{
     width: "200px",
     height:"200px",
     borderRadius: "100px",
+    border: "8px solid #794A86",
+    
   },
+  image2:{
+    width: "400px",
+    height:"300px",
+    borderRadius: "20px",
+    border: "8px solid #794A86",
+  },
+ 
 });
 
